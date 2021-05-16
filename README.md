@@ -21,4 +21,4 @@ don't try it at home or anyone else's home.
 
 ## Screenshots
 
-![Image of OpenSCAD](https://raw.githubusercontent.com/toAlice/toy-fridgerator/master/screenshot.png)
+![Image of OpenSCAD](https://raw.githubusercontent.com/toAlice/toy-fridgerator/main/screenshot.png)
