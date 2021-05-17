@@ -115,13 +115,14 @@ module fronts() {
     translate([5, 0, 5 + 35 + 5 + 250]) cube([150, 5, 5 + 3 + 40 + 5]);
 
     // outer front lower
-    translate([5 + 5, 5, 5]) difference() {
-        cube([140, 5, 35]);
+    translate([5, 0, 0]) difference() {
+        cube([150, 5, 35 + 5 + 5]);
         // 30mm fan holes
-        translate([0, 6, 15]) {
-            translate([20, 0, 0]) rotate([90, 0, 0]) cylinder(d = 30, h = 7);
-            translate([70, 0, 0]) rotate([90, 0, 0]) cylinder(d = 30, h = 7);
-            translate([120, 0, 0]) rotate([90, 0, 0]) cylinder(d = 30, h = 7);
+        translate([5, 6, 5 + 15]) {
+            translate([5 + 15, 0, 0]) rotate([90, 0, 0]) cylinder(d = 30, h = 7);
+            translate([53.3, 0, 0]) rotate([90, 0, 0]) cylinder(d = 30, h = 7);
+            translate([86.6, 0, 0]) rotate([90, 0, 0]) cylinder(d = 30, h = 7);
+            translate([140 - 15 - 5, 0, 0]) rotate([90, 0, 0]) cylinder(d = 30, h = 7);
         }
     }
 }
@@ -138,17 +139,30 @@ module backs() {
 }
 
 module door() {
-    // inner door
-    translate([5 + 5, 5, 5 + 35 + 5]) cube([140, 5, 250]);
-    // outer door
-    translate([5, 0, 5 + 35 + 5]) difference() {
-        union() {
-            cube([150, 5, 250]);
-            translate([75 - 5, -4.99, 230]) cube([10, 5, 10]);
+    // door
+    %union() {
+        // inner door
+        translate([5 + 5, 5, 5 + 35 + 5]) cube([140, 5, 250]);
+        // outer door
+        translate([5, 0, 5 + 35 + 5]) difference() {
+            union() {
+                cube([150, 5, 250]);
+                translate([75 - 5, -4.99, 230]) cube([10, 5, 10]);
+            }
+            // magnet
+            translate([5 + 5, -0.01, 200]) cube([10, 5.02, 40]);
+            translate([-10 + 150 - 5 - 5, -0.01, 200]) cube([10, 5.02, 40]);
         }
-        // magnet
-        translate([5 + 5, -0.01, 200]) cube([10, 5.02, 40]);
-        translate([-10 + 150 - 5 - 5, -0.01, 200]) cube([10, 5.02, 40]);
+    }
+
+    // hinge
+    union() {
+        // right
+        translate([5 + 5 + 5, -0.35, 5 + 35 + 5 - 5]) cube([8, 0.35, 10]);
+        translate([5 + 5 + 5, -0.35, 5 + 35 + 5]) rotate([0, 90, 0]) cylinder(d = 2, h = 8);
+        // left
+        translate([5 + 150 - 5 - 5 - 8, -0.35, 5 + 35 + 5 - 5]) cube([8, 0.35, 10]);
+        translate([5 + 150 - 5 - 5 - 8, -0.35, 5 + 35 + 5]) rotate([0, 90, 0]) cylinder(d = 2, h = 8);
     }
 }
 
@@ -157,6 +171,6 @@ module door() {
 bottoms();
 fronts();
 backs();
-% door();
+door();
 
 translate([5 + 34, 5 + 250 - 110 - 80, 5]) psu();
