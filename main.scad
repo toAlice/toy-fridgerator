@@ -1,5 +1,5 @@
-use <heatsink.scad>;
-use <tec.scad>;
+use <heatsink.scad>
+use <tec.scad>
 use <psu.scad>
 
 module top() {
